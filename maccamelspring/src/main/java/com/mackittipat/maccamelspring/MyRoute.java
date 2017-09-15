@@ -8,13 +8,8 @@ public class MyRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
-        from("file:/home/mac/Downloads/in?noop=true")
-                .convertBodyTo(String.class)
-                .process(exchange -> {
-                    System.out.println(exchange.getIn().getBody());
-                })
-                .to("file:/home/mac/Downloads/out");
-
+        from("direct:start").process(exchange -> {
+            System.out.println(exchange.getIn().getBody(String.class));
+        });
     }
 }
